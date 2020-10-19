@@ -13,11 +13,6 @@ jobs:
       - checkout
 
       - run:
-          name: Liste les fichiers du dépots
-          command: |
-            ls
-
-      - run:
           name: install dependencies
           command: |
             git clone https://github.com/lyvd/bandit4mal.git
