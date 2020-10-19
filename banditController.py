@@ -10,7 +10,7 @@ def startBandit(libName):
     global PATH_SITE_PACKAGE
     #    First get site-package
     cmd = f'python3 -c "import {libName} as lib; print(lib.__path__)"'
-    print(f'$> {cmd}')
+    print(f'\t$> {cmd}')
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     (output, err) = process.communicate()
     process.wait()
