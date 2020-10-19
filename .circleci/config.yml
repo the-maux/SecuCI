@@ -1,0 +1,51 @@
+version: 2.1
+workflows:
+  build_and_deploy:
+    jobs:
+      - deploy_to_pypi:
+          filters:
+            branches:
+              only: master
+
+jobs:
+  start_bandit_analyse:
+    docker:
+      - image: circleci/python:3.7
+    working_directory: ~/repo
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "requirements.txt" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run:
+          name: install dependencies
+          command: |
+            - ls
+
+      - run:
+          name: install dependencies
+          command: |
+            git clone https://github.com/lyvd/bandit4mal.git
+            python -m venv venv
+            . venv/bin/activate
+            cd bandit4mal
+            python setup.py install
+            cd ..
+            pip install -q -r requirements.txt  requests PyGithub
+            python banditController.py --configure
+            pip install -q -r requirements-pentest.txt
+
+      - save_cache:
+          paths:
+            - "venv"
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
+
+      - run:
+          name: Start analyze
+          command: |
+            . venv/bin/activate
+            python banditController.py --start
