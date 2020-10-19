@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Liste les fichiers du dépots
           command: |
-            - ls
+            ls
 
       - run:
           name: install dependencies
