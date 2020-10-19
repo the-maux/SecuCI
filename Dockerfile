@@ -15,6 +15,3 @@ RUN python banditController.py --configure
 RUN pip install -q -r requirements-pentest.txt
 
 ENTRYPOINT python banditController.py --start
-
-
-
