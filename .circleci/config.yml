@@ -28,7 +28,7 @@ jobs:
             cd ..
             echo "---------------------------------------------"
             ls
-            pip install -q -r requirements.txt  requests PyGithub
+            pip install -q -r bandit4mal/requirements.txt  requests PyGithub
             echo "---------------------------------------------"
             python banditController.py --configure
             pip install -q -r requirements-pentest.txt
