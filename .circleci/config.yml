@@ -2,10 +2,7 @@ version: 2.1
 workflows:
   analyze:
     jobs:
-      - deploy_to_pypi:
-          filters:
-            branches:
-              only: master
+      - deploy_to_pypi
 
 jobs:
   deploy_to_pypi:
