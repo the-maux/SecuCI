@@ -12,14 +12,8 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "requirements.txt" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
       - run:
-          name: install dependencies
+          name: Liste les fichiers du dépots
           command: |
             - ls
 
@@ -35,11 +29,6 @@ jobs:
             pip install -q -r requirements.txt  requests PyGithub
             python banditController.py --configure
             pip install -q -r requirements-pentest.txt
-
-      - save_cache:
-          paths:
-            - "venv"
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
 
       - run:
           name: Start analyze
